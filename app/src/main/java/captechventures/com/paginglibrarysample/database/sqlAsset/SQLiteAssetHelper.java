@@ -57,7 +57,7 @@ import java.util.zip.ZipInputStream;
  */
 public class SQLiteAssetHelper extends SQLiteOpenHelper {
 
-    private static final String TAG           = SQLiteAssetHelper.class.getSimpleName();
+    private static final String TAG = SQLiteAssetHelper.class.getSimpleName();
     private static final String ASSET_DB_PATH = "databases";
 
     private final Context mContext;

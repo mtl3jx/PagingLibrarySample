@@ -13,10 +13,11 @@ import org.jetbrains.annotations.NotNull;
 
 public final class PersonsViewModel extends AndroidViewModel {
 
-//    private static final int INITIAL_LOAD_KEY = 0;
-//    private static final int PAGE_SIZE = 20;
-//    private static final int PREFETCH_DISTANCE = 5;
+    private static final int INITIAL_LOAD_KEY = 0;
+    private static final int PAGE_SIZE = 20;
+    private static final int PREFETCH_DISTANCE = 5;
 
+    //    private Executor executor;
     private AppDatabase appDatabase;
     private final PersonDao personDao;
     private LiveData<PagedList<Person>> liveResults;
@@ -27,14 +28,26 @@ public final class PersonsViewModel extends AndroidViewModel {
         appDatabase = AppDatabase.getInstance(this.getApplication());
         personDao = appDatabase.personDao();
         DataSource.Factory factory = personDao.getAllPaged();
-        LivePagedListBuilder pagedListBuilder = new LivePagedListBuilder(factory, 50);
+
+        LivePagedListBuilder pagedListBuilder = new LivePagedListBuilder(factory, PAGE_SIZE);
         liveResults = pagedListBuilder.build();
 
+        // ATTEMPT #2
 //        liveResults = factory.create(INITIAL_LOAD_KEY, new PagedList.Config.Builder()
 //                .setPageSize(PAGE_SIZE)
 //                .setPrefetchDistance(PREFETCH_DISTANCE)
 //                .setEnablePlaceholders(true)
 //                .build());
+
+        // ATTEMPT #3
+//        executor = Executors.newFixedThreadPool(5);
+//        PagedList.Config pagedListConfig = (new PagedList.Config.Builder())
+//                        .setEnablePlaceholders(false)
+//                        .setInitialLoadSizeHint(10)
+//                        .setPageSize(PAGE_SIZE).build();
+//        liveResults = (new LivePagedListBuilder(factory, pagedListConfig))
+//                .setFetchExecutor(executor)
+//                .build();
     }
 
     public LiveData<PagedList<Person>> getPersons() {

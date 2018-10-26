@@ -11,7 +11,7 @@ import captechventures.com.paginglibrarysample.model.Person;
 @Database(entities = Person.class, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
     // constants
-    private static final String DATABASE_NAME = "assignment4.db";
+    private static final String DATABASE_NAME = "database.db";
 
     // instances
     private static AppDatabase INSTANCE;
